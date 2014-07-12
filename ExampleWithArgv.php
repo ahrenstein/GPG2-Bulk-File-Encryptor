@@ -11,7 +11,7 @@
 require_once("includes/GPGBulkFileEncryptor.class.php"); //Require the GPG Bulk File Encryptor class
 
 $directory       = $argv[1]; //Store our directory in a variable
-$recipient = $argv[2];
+$recipient = $argv[2]; //Store our recipient in a variable
 $deleteOriginals = ($argv[3] === 'true'); //if the string is true then it is boolean true and files will be deleted. Anything else matches false to be safe
 
 //The below if/else is used to check if CLI arguments were properly filled out.
