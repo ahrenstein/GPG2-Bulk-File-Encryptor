@@ -11,6 +11,8 @@ as separate files for later individual decryption.
 === Limitations ===
 *1) It seems that either PHP exec or gpg2 doesn't like using relative directories like ~/file.txt so if the directory you want to encrypt is in your home directory, then you will need to specify the full path
 *2) gpg2 doesn't output a progress bar, so if you start encrypting a 2GB video file, you will be sitting there waiting for it to complete with no idea where it is
+*3) gpg2 uses RAM to hold the file being processed, so if your file is larger than your free RAM, you will get errors
+*4) Decryption requires a passphrase so unless you store it in an active keyring (ex: Keychain Access for OS X) you will be prompted for it at each file or during a cron
 === Requirements ===
 This PHP class requires the gpg2 binary. I have only tested this on OS X 10.9 Mavericks so far using the GPG binaries provided by https://gpgtools.org/gpgsuite.html but it should work
 with any version of the gpg2 binary.
