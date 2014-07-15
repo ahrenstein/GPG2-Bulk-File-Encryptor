@@ -12,7 +12,8 @@ require_once("includes/GPGBulkFileEncryptor.class.php"); //Require the GPG Bulk 
 
 $directory       = "/Users/MacUser/Desktop/StuffToEncrypt/"; //The directory to recursively encrypt in
 $recipient       = "macuser@icloud.com"; //The e-mail address of the public key in our keyring with permission to decrypt
-$deleteOriginals = FALSE; //Let's keep originals afterwards
+$deleteOriginals = TRUE; //Let's delete the originals so we can demo decryption
 
 $encryptionTime = new GPGBulkFileEncryptor(); //Instantiate a new instance of our bulk file encryption class
 $encryptionTime->gpgBulkFileEncrypt($directory, $recipient, $deleteOriginals); //Run the encryption function with our parameters
+$encryptionTime->gpgBulkFileDecrypt($directory, $deleteOriginals); //Run the decryption function with our parameters

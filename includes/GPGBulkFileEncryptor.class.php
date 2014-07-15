@@ -36,7 +36,7 @@ class GPGBulkFileEncryptor
 	 *
 	 * @param $rootPath string path to the directory you want to recursively encrypt from
 	 * @param $recipient string e-mail address of a public key in your keyring
-	 * @param bool $deleteOriginal true or false to keep original unencrypted file after processing.
+	 * @param bool $deleteOriginal true or false to keep original unencrypted file after processing
 	 *
 	 * We err on the side of caution with the last param and don't delete files by default
 	 */
@@ -73,6 +73,44 @@ class GPGBulkFileEncryptor
 			else //Encrypted files just get listed as already encrypted
 			{
 				echo $file . " is already encrypted, and will be ignored.\n"; //Alert that the file is already encrypted and do nothing
+			}
+		}
+	}
+
+	/**
+	 * Recursively decrypt files in a directory using gpg2
+	 *
+	 * @param $rootPath string path to the directory you want to recursively decrypt from
+	 * @param bool $deleteOriginal true or false to keep original encrypted file after processing
+	 *
+	 * We err on the side of caution with the last param and don't delete files by default
+	 */
+	public function gpgBulkFileDecrypt($rootPath, $deleteOriginal = FALSE)
+	{
+		// The following if/else checks the root path to see if it ends in / or not. The root path needs to end in /*/
+		if ($rootPath[strlen($rootPath) - 1] == "/")
+		{
+			$rootPath = $rootPath . "*.gpg"; //Just add a search for all encrypted files
+		}
+		else
+		{
+			$rootPath = $rootPath . "/*.gpg"; //Add the trailing / and a search for all encrypted files
+		}
+
+		$filesToDecrypt = $this->glob_recursive($rootPath); //Create an array listing every encrypted file in the specified root path
+
+		foreach ($filesToDecrypt as $file) //Iterate through the files
+		{
+			if ($deleteOriginal == FALSE) //Perform decryption without deleting the original file
+			{
+				exec("gpg2 --yes -o \"" . substr($file, 0, -4) . "\"" . " --decrypt \"" . $file . "\""); //Decrypt the file
+				echo $file . " has been decrypted, but the original file was not deleted.\n"; //Alert that the file has been decrypted and the original saved
+			}
+			elseif ($deleteOriginal == TRUE) //Perform decryption and delete the original file
+			{
+				exec("gpg2 --yes -o \"" . substr($file, 0, -4) . "\"" . " --decrypt \"" . $file . "\""); //Decrypt the file
+				unlink($file); //Delete the original
+				echo $file . " has been decrypted, and the original file was deleted.\n"; //Alert that the file has been decrypted and the original deleted
 			}
 		}
 	}
