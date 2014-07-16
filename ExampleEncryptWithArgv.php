@@ -21,7 +21,7 @@ if (count($argv) == 4 AND file_exists($argv[1]) == TRUE) //Check to make sure we
 }
 else
 {
-	echo "Usage: " . $argv[0] . " <directory to recursively encrypt> <recipient key e-mail. <delete files>\n";
+	echo "Usage: " . $argv[0] . " <directory to recursively encrypt> <recipient key e-mail> <delete files>\n";
 	echo "directory to recursively encrypt: Must be a valid existing directory\n";
 	echo "recipient key e-mail: Must be a valid e-mail address of someone in your GPG keyring\n";
 	echo "delete files: true/false\n";
