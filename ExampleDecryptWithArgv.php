@@ -28,4 +28,4 @@ else
 
 //The below code is the actual script, and will run if CLI arguments look good above
 $decryptionTime = new GPGBulkFileEncryptor(); //Instantiate a new instance of our bulk file encryption class
-$decryptionTime->gpgBulkFileDecrypt($directory, $recipient, $deleteOriginals); //Run the decryption function with our parameters
+$decryptionTime->gpgBulkFileDecrypt($directory, $deleteOriginals); //Run the decryption function with our parameters
