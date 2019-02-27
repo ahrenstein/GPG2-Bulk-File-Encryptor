@@ -1,6 +1,9 @@
 === What does this do? ===
 GPG Bulk File Encryptor is a simple PHP class and set of example CLI scripts that allows you to encrypt multiple files in a path without them being zipped into a single encrypted archive.
 The directory structure of the specified root path to start with is preserved so /path/to/file.txt will result in /path/to/file.txt.gpg
+=== DEPRECATION ===
+This repo is no longer updated. Doing this in PHP is a weird way to make a CLI tool.  
+[A Python3](https://github.com/ahrenstein/GPG-Bulk-File-Management) script was created as a proper replacement for it.
 === Why did I write this? ===
 When using GPG Tools for Mac I discovered that encrypting more than one file at a time zips them together. I wanted to encrypt multiple files at once, but still keep them
 as separate files for later individual decryption.
